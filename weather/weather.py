@@ -4,6 +4,7 @@ import requests
 #y = json.loads(x)
 #y['age']
 from datetime import datetime
+import unicodedata
 
 class Weather_object:
     def __init__(self, city_id=None):
@@ -27,7 +28,10 @@ class Weather_object:
         form list where is name of city as list
         """
         #edit city_name
-        city_name = city_name.rstrip().lstrip().lower()
+        edit_str_one = lambda s: ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+        edit_str = lambda s: edit_str_one(s).strip().replace(' ', '').lower()
+
+        city_name = edit_str(city_name)
         #return value
         possible_cities = set()
         #open file
@@ -37,7 +41,8 @@ class Weather_object:
         what_inpt = None
 
         for json_item in json_data:
-            if json_item['name'].rstrip().lstrip().lower() == city_name:
+            compare = edit_str(json_item['name'])
+            if compare == city_name:
                 possible_cities.add((json_item['country'], json_item['coord']['lon'], json_item['coord']['lat'], json_item['id']))
 
         return possible_cities
@@ -56,11 +61,11 @@ class Weather_object:
                 'city': self.raw_data['name'],
                 'country': self.raw_data['sys']['country'],
                 'id': self.raw_data['id'],
-                'coord': (self.raw_data['coord']['lon'], self.raw_data['coord']['lat']),
+                'coord': (self.raw_data['coord']['lat'], self.raw_data['coord']['lon']),
                 'datetime': self.read_time(self.raw_data['dt']),
                 'sunrise': self.read_time(self.raw_data['sys']['sunrise']),
                 'sunset': self.read_time(self.raw_data['sys']['sunset']),
-                'timezone': self.read_time(self.raw_data['timezone']),
+                'timezone': 'UTC + ' + str(int(self.raw_data['timezone'])//3600) + 'h',
                 'visibility': self.raw_data['visibility'],
                 'clouds': self.raw_data['clouds']['all'],
                 'feels_like': self.raw_data['main']['feels_like'],
@@ -71,7 +76,7 @@ class Weather_object:
                 'temp_min': self.raw_data['main']['temp_min'],
                 'description': self.raw_data['weather'][0]['description'],
                 'wind_speed': self.raw_data['wind']['speed'],
-                'wind_deg': self.raw_data['wind'] if 'deg' in self.raw_data['wind'] else '-',
+                'wind_deg': self.raw_data['wind']['deg'] if 'deg' in self.raw_data['wind'] else '-',
                 'rain_1h': '-',
                 'rain_3h': '-',
                 'snow_1h': '-',

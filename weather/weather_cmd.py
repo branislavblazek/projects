@@ -13,25 +13,6 @@ class Weather_CMD:
         self.data = self.get_readable_data()
         self.output_mode = output_mode
 
-    def __repr__(self):
-        if self.output_mode == 'console':
-            for index, key in enumerate(self.data):
-                first_line = ''
-                if index == 0:
-                    first_line = '{0:_^53.53}'.format('')
-                else:
-                    first_line = '{0:-^53.53}'.format('')
-                print(first_line)
-                second_line = '|'
-                left = str('{0:^25.25}'.format(str(key)))
-                second_line += left + '|'
-                right = str('{0:^25.25}'.format(str(self.data[key])))
-                second_line += right + '|'
-                print(second_line)
-                if index == len(self.data) - 1:
-                    print('{0:-^53.53}'.format(''))
-        return ''
-
     def ask_for_city(self):
         user_city = input('Enter a name of city: ')
         possible_cities = self.object.get_city_id(user_city)
@@ -68,5 +49,75 @@ class Weather_CMD:
 
         return data
 
-console_data = Weather_CMD()
-print(console_data)
+def create_console_table(data):
+    intro = [
+        ('Place', ('city', 'country')),
+        ('ID', 'id'),
+        ('Coords', 'coord'),
+        ('Updated', 'datetime'),
+        ('Timezone', 'timezone'),
+        ('Surise', 'sunrise'),
+        ('Sunset', 'sunset'),
+        ('Description', 'description'),
+        ('Visibility', 'visibility'),
+        ('Clouds', 'clouds'),
+        ('Humidity', 'humidity'),
+        ('Pressure', 'pressure'),
+        ('Max temp', 'temp_max'),
+        ('Temp', 'temp'),
+        ('Min temp', 'temp_min'),
+        ('Feels like', 'feels_like'),
+        ('Wind speed', 'wind_speed'),
+        ('Wind degree', 'wind_deg'),
+        ('Rain last hour', 'rain_1h'),
+        ('Snow last hour', 'snow_1h'),
+        ('Rain last 3 hours', 'rain_3h'),
+        ('Snow last 3 hours', 'snow_3h')
+    ]
+
+    pocet_okien = len(data) + 1
+    pocet_stien = pocet_okien + 1
+    dlzka = (pocet_okien * 25) + pocet_stien
+
+    data.insert(0, intro)
+
+    for row, item in enumerate(intro):
+        first_line = ''
+        if row == 0:
+            first_line = '{0:_^{1}.{1}}'.format('', dlzka)
+        else:
+            first_line = '{0:-^{1}.{1}}'.format('', dlzka)
+        print(first_line)
+
+        for index, values in enumerate(data):
+            second_line = '|'
+            if index == 0:
+                text = str('{0:^25.25}'.format(item[0]))
+                second_line += text
+            else:
+                value = ''
+                if isinstance(item[1], str):
+                    value = values[item[1]]
+                else:
+                    for need in item[1]:
+                        value += values[need]
+                text = str('{0:^25.25}'.format(str(value)))
+                second_line += text
+
+                if index == len(data) - 1:
+                    second_line += '|'
+
+            print(second_line, end='')
+        print(end='\n')
+
+        if row == len(intro) - 1:
+            print('{0:-^{1}.{1}}'.format('', dlzka))
+
+number = input('Enter the number of cities you want to see... ')
+inputs = []
+if int(number) == 0:
+    print('Okay, your problem, you dont want to see it.')
+else:
+    for i in range(int(number)):
+        inputs.append(Weather_CMD().data)
+    create_console_table([*inputs])
