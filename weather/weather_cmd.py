@@ -76,8 +76,9 @@ def create_console_table(data):
     ]
 
     pocet_okien = len(data) + 1
+    sirka = 25
     pocet_stien = pocet_okien + 1
-    dlzka = (pocet_okien * 25) + pocet_stien
+    dlzka = (pocet_okien * sirka) + pocet_stien
 
     data.insert(0, intro)
 
@@ -92,7 +93,7 @@ def create_console_table(data):
         for index, values in enumerate(data):
             second_line = '|'
             if index == 0:
-                text = str('{0:^25.25}'.format(item[0]))
+                text = str('{0:^{1}.{1}}'.format(item[0], sirka))
                 second_line += text
             else:
                 value = ''
@@ -101,7 +102,7 @@ def create_console_table(data):
                 else:
                     for need in item[1]:
                         value += values[need]
-                text = str('{0:^25.25}'.format(str(value)))
+                text = str('{0:^{1}.{1}}'.format(str(value), sirka))
                 second_line += text
 
                 if index == len(data) - 1:

@@ -92,5 +92,21 @@ class Weather_object:
         return new_data
 
 
-    def read_time(self, timestamp):
-        return datetime.fromtimestamp(timestamp).strftime('%d.%m.%Y %H:%M:%S')
+    def read_time(self, timestamp, format='full'):
+        format = format.lower()
+        formula = ''
+        if format == 'full':
+            #01.01.2020 09:30:57
+            formula = '%d.%m.%Y %H:%M:%S'
+        elif format == 'short':
+            #1.1.20 9:30
+            formula = '%-d.%-m.%y %-H:%-M'
+        elif format == 'full_h':
+            format = '%d.%m.%Y %H'
+        elif format == 'short_h':
+            formula = '%-d.%-m.%y %H'
+        elif format == 'full_time':
+            formula = '%H:%M:%S'
+        elif format == 'short_time':
+            formula = '%-H:%-M'
+        return datetime.fromtimestamp(timestamp).strftime(formula)
