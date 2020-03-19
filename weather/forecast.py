@@ -72,6 +72,9 @@ class Forecast_object:
         elif format == 'short_time':
             #9:30
             return xxx.strftime('%H:%M').lstrip("0")
+        elif format == 'sun':
+            #01.01. 6:30
+            return xxx.strftime('%d.%m. %H:%M')
 
     def get_readable_data(self):
         if self.raw_data['cod'] != '200':
@@ -84,9 +87,9 @@ class Forecast_object:
                 'country': self.raw_data['city']['country'],
                 'id': self.raw_data['city']['id'],
                 'name': self.raw_data['city']['name'],
-                'sunrise': self.raw_data['city']['sunrise'],
-                'sunset': self.raw_data['city']['sunset'],
-                'timezone': self.raw_data['city']['timezone']
+                'sunrise': self.read_time(self.raw_data['city']['sunrise'], 'sun'),
+                'sunset': self.read_time(self.raw_data['city']['sunset'], 'sun'),
+                'timezone': 'UTC + ' + str(int(self.raw_data['city']['timezone']) // 3600) + 'h'
             }
             forecast = []
             for item_forecast in self.raw_data['list']:
