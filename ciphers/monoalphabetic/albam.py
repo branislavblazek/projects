@@ -1,4 +1,4 @@
-class Atbam():
+class Albam():
     def __init__(self, alphabet=None):
         self.alphabet = [chr(i+97) for i in range(26)] if alphabet is None else alphabet.lower()
         self.table = self.alphabet[len(self.alphabet)//2:] + self.alphabet[:len(self.alphabet)//2]
@@ -37,7 +37,7 @@ class Atbam():
         return decoded_text
 
 
-cipher = Atbam("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+cipher = Albam("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 sprava = cipher.encode('Oko albatros')
 print(sprava)
 normal = cipher.decode(sprava)

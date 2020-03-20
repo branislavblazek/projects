@@ -50,6 +50,7 @@ class One_two():
         key = key.lower().lstrip().rstrip()
         encoded_text = ""
         table = self.create_square(key)
+        
         for letter in input_text:
             for row in range(4):
                 for column in range(7):
