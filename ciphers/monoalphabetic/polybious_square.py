@@ -1,12 +1,13 @@
 class Polybious:
-    def __init__(self):
+    def __init__(self, pridaj=0):
         self.alphabet = [chr(i+97) for i in range(26)]
         self.alphabet.remove('w')
-        self.alphabet += [str(i) for i in range(0, 10)]
-        self.alphabet.append(' ')
+        if pridaj == 1:
+            self.alphabet += [str(i) for i in range(0, 10)]
+            self.alphabet.append(' ')
         self.len = len(self.alphabet)
         self.can_use = self.alphabet
-        self.grid = 6
+        self.grid = 5 + pridaj
 
     def intersection(self, lst1, lst2): 
         lst3 = [value for value in lst2 if value not in lst1] 
@@ -67,3 +68,5 @@ message = cipher.encode(sprava, 'branislavblazek')
 print(message)
 text = cipher.decode(message, 'branislavblazek')
 print(text)
+
+print(cipher.decode('52 42 15 21 51 34 25 24 42 45 11 43 25 21 15 25 43 42 23 12 45 14 25 43 42 24 41 25 15 12 43 14 23 15 14 23', 'tarinka'))

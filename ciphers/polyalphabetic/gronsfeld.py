@@ -49,3 +49,5 @@ message = cipher.encode('dnes je krasny den aby som nieco robil!', 1)
 print(message)
 text = cipher.decode(message, 1)
 print(text)
+
+print(cipher.decode('mf ya ualmmt snvlsst', 314159))

@@ -60,3 +60,5 @@ sprava = cipher.encode(text, 18)
 normal = cipher.decode(sprava, 18)
 print(sprava)
 print(normal)
+
+print(cipher.decode('mlgulw rg kwnwjfwb kljsfq', 18))

@@ -41,3 +41,5 @@ message = cipher.encode('ahoj velmi krasny svet ako sa mas dnes je krasny den na
 print(message)
 text = cipher.decode(message)
 print(text)
+
+print(cipher.decode('psgoii thl tevgpwb xeaxtykj'))

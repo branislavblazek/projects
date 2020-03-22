@@ -16,8 +16,8 @@ class One_two():
             self.column.append(self.row[remove])
             del self.row[remove]
 
-        self.column = [0, 2, 3, 5, 7, 8, 9]
-        self.row = [0,6,1,4]
+        self.column = [0, 1, 2, 3, 4, 7, 8]
+        self.row = [0, 9, 6, 5]
 
     def intersection(self, lst1, lst2): 
         lst3 = [value for value in lst2 if value not in lst1] 
@@ -68,10 +68,16 @@ class One_two():
         key = key.lower().lstrip().rstrip()
         decoded_text = ""
         table = self.create_square(key)
+        print(table)
 
         for pair in input_text:
-            row = self.row.index(int(pair[0]))
-            column = self.column.index(int(pair[1]))
+            if len (pair) == 1:
+                row = serow = self.row.index(0)
+                column = self.column.index(int(pair[0]))
+            else:
+                row = self.row.index(int(pair[0]))
+                column = self.column.index(int(pair[1]))
+
             letter = table[row][column]
             decoded_text += letter
 
@@ -83,3 +89,5 @@ message = cipher.encode(sprava, 'branislavblazek')
 print(message)
 text = cipher.decode(message, 'branislavblazek')
 print(text)
+
+print(cipher.decode('50 62 4 7 68 98 92 91 4 92 67 67 7 1 2 92 91 62', 'tarinka'))

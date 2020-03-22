@@ -47,3 +47,5 @@ message = cipher.encode('albatrosik je velmi pekny vtacik', 'okno')
 print(message)
 text = cipher.decode(message, 'okno')
 print(text)
+
+print(cipher.decode('wnva b zoe ojurt pki iwue', 'tarinka'))

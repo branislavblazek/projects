@@ -1,4 +1,5 @@
-class Simple:
+from pprint import pprint
+class France:
     def __init__(self):
         self.alphabet = [chr(i+97) for i in range(26)]
 
@@ -20,10 +21,12 @@ class Simple:
 
         return order
 
-    def encode(self, input_text, key):
+    def encode(self, input_text, key, diagonal_a, diagonal_b):
         input_text = input_text.lower().lstrip().rstrip()
         text = [letter for letter in input_text if letter in self.alphabet]
         key = key.lower().lstrip().rstrip()
+        diagonal_a = diagonal_a.lower().lstrip().rstrip()
+        diagonal_b = diagonal_b.lower().lstrip().rstrip()
         #len povolene znaky
         key = [letter for letter in key if letter in self.alphabet]
         #najdi opakovanie
@@ -35,6 +38,7 @@ class Simple:
             else:
                 perm_key.append(letter)
 
+        key = perm_key
         perm_key = self.find_order(perm_key)
         #vytvor tabulku
         table = []
@@ -48,16 +52,33 @@ class Simple:
 
         encoded_text = ""
 
+        #prejdi prvu uhlopriecku
+        for index, letter in enumerate(key):
+            if letter == diagonal_a:
+                #ziskaj pismena v diagonale
+                for index_of_row, row in enumerate(table):
+                    if index + index_of_row < len(row):
+                        encoded_text += row[index + index_of_row]
+                        table[index_of_row][index + index_of_row] = '-'
+
+        #prejdi druhu uhlopriecku
+        for index in range(len(key)-1,-1,-1):
+            letter = key[index]
+            if letter == diagonal_b:
+                #ziskaj pismena v diagonale
+                for index_of_row, row in enumerate(table):
+                    if index - index_of_row >= 0 and row[index - index_of_row] != '-':
+                        encoded_text += row[index - index_of_row]
+                        table[index_of_row][index - index_of_row] = '-'
+
         #prejdi perm_key, ziskavaj stlpce
         for index in perm_key:
             minimum = min(perm_key)
             index_of_min = perm_key.index(minimum)
             perm_key[index_of_min] = 9999
             for row in table:
-                try:
+                if index_of_min < len(row) and row[index_of_min] != '-':
                     encoded_text += row[index_of_min]
-                except IndexError:
-                    pass
 
         #rozdel po piatich
         encoded_text = [encoded_text[i:i+5] for i in range(0,len(encoded_text), 5)]
@@ -65,10 +86,12 @@ class Simple:
 
         return encoded_text
     
-    def decode(self, input_text, key):
+    def decode(self, input_text, key, diagonal_a, diagonal_b):
         input_text = input_text.lower().lstrip().rstrip()
         text = [letter for letter in input_text if letter in self.alphabet]
         key = key.lower().lstrip().rstrip()
+        diagonal_a = diagonal_a.lower().lstrip().rstrip()
+        diagonal_b = diagonal_b.lower().lstrip().rstrip()
         #len povolene znaky
         key = [letter for letter in key if letter in self.alphabet]
         #najdi opakovanie
@@ -80,6 +103,7 @@ class Simple:
             else:
                 perm_key.append(letter)
 
+        key = perm_key
         perm_key = self.find_order(perm_key)
         #vytvor tabulku
         pocet_row = {}
@@ -96,18 +120,35 @@ class Simple:
         table = [[[] for _ in range(len(perm_key))] for _ in range(max_row)]
         columns = []
 
-        for item in pocet_row.items():
-            value = item[1]
-            columns.append(text[:value])
-            del text[:value]
+        #prva diagonala
+        for index, letter in enumerate(key):
+            if letter == diagonal_a:
+                #pridaj pismena do diagonaly
+                for index_of_row, row in enumerate(table):
+                    if index_of_row + index < len(row):
+                        table[index_of_row][index + index_of_row] = text[0]
+                        del text[0]
+        
+        #druha diagonala
+        for index in range(len(key)-1, -1, -1):
+            letter = key[index]
+            if letter == diagonal_b:
+                #pridaj pismena do diagonaly
+                for index_of_row, row in enumerate(table):
+                    if index - index_of_row >= 0 and row[index - index_of_row] == []:
+                        table[index_of_row][index - index_of_row] = text[0]
+                        del text[0]
 
         #prejdi perm_key, ziskavaj stlpce
         for index in perm_key:
             minimum = min(perm_key)
             index_of_min = perm_key.index(minimum)
             perm_key[index_of_min] = 9999
-            for index, letter_to_row in enumerate(columns[minimum]):
-                table[index][index_of_min] = letter_to_row
+            for index, row in enumerate(table):
+                if row[index_of_min] == []:
+                    if index_of_min < len(row) and len(text) > 0:
+                        table[index][index_of_min] = text[0]
+                        del text[0]
 
         decoded_text = ""    
         for row in table:
@@ -117,13 +158,9 @@ class Simple:
 
         return decoded_text
 
-#neuplna tabulka
-cipher = Simple()
-text = 'kdyz se na svete objevi opravdovy genius poznate ho podle toho ze se proti nemu spiknou vsichni hlupaci'
-message = cipher.encode(text, 'neprecte toooo')
+cipher = France()
+text = 'laska temer nahrazuje mysleni laska je horouci zapomenuti na vsechno ostatni a potom zadejte aby vasen byla logicka'
+message = cipher.encode(text, 'eiffelova vez', 'e', 'v')
 print(message)
-text = cipher.decode(message, 'neprecte toooo')
+text = cipher.decode(message, 'eiffelova vez', 'e', 'v')
 print(text)
-
-print(cipher.encode('dnes vyse stovka obeti a vyse desat mrtvych vlada nema ani ruska cestoviny a toaletny papier uz nie su', 'koronavirus vladne'))
-print(cipher.decode('ysdtp arioe otras eysee dnved tcktk mntiv yasab vulun ihans vlepe avcys eeiro aayzt smnus eaoiv taan', 'koronavirus vladne'))

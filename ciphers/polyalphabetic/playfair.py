@@ -132,3 +132,5 @@ message = cipher.encode('tato sifra je docela jednoducha', 'heslo')
 print(message)
 text = cipher.decode(message, 'heslo')
 print(text)
+
+print(cipher.decode('nb ex cr nk xl ef xl ae bn eo vi fj', 'korona'))

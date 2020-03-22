@@ -83,3 +83,5 @@ message = cipher_smart.encode('albatros', 'pavel')
 print(message)
 text = cipher_smart.decode(message, 'pavel')
 print(text)
+
+print(cipher.decode('wmrenfkcn vzazkybp lkzjkw txko', 'korona'))
