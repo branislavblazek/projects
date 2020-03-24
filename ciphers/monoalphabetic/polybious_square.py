@@ -1,7 +1,7 @@
 class Polybious:
     def __init__(self, pridaj=0):
-        self.alphabet = [chr(i+97) for i in range(26)]
-        self.alphabet.remove('w')
+        self.alphabet = [chr(i+65) for i in range(26)]
+        self.alphabet.remove('W')
         if pridaj == 1:
             self.alphabet += [str(i) for i in range(0, 10)]
             self.alphabet.append(' ')
@@ -36,8 +36,8 @@ class Polybious:
         return table
 
     def encode(self, input_text, key):
-        input_text = input_text.lower().lstrip().rstrip().replace('w', 'v')
-        key = key.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip().replace('W', 'V')
+        key = key.upper().lstrip().rstrip()
         encoded_text = ""
         table = self.create_square(key)
 
@@ -49,8 +49,8 @@ class Polybious:
         return encoded_text
 
     def decode(self, input_text, key):
-        input_text = input_text.lower().lstrip().rstrip().split(' ')
-        key = key.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip().split(' ')
+        key = key.upper().lstrip().rstrip()
         decoded_text = ""
         table = self.create_square(key)
 

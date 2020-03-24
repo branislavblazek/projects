@@ -1,10 +1,10 @@
 class Affine:
     def __init__(self, alphabet=None):
-        self.alphabet = [chr(i+97) for i in range(26)] if alphabet is None else alphabet.lower()
+        self.alphabet = [chr(i+65) for i in range(26)] if alphabet is None else alphabet.upper()
         self.alpha_len = len(self.alphabet)
 
     def encode(self, input_text, a, b):
-        input_text = input_text.lower()
+        input_text = input_text.upper()
         encoded_text = ""
 
         if self.alpha_len % a == 0:
@@ -23,7 +23,7 @@ class Affine:
         return encoded_text
 
     def decode(self, input_text, a, b):
-        input_text = input_text.lower()
+        input_text = input_text.upper()
         decoded_text = ""
 
         if self.alpha_len % a == 0:

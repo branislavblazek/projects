@@ -1,6 +1,6 @@
 class Caesar:
     def __init__(self, alphabet=None):
-        self.alphabet = [chr(i + 97) for i in range(26)] if alphabet is None else alphabet.lower()
+        self.alphabet = [chr(i + 65) for i in range(26)] if alphabet is None else alphabet.upper()
         self.alpha_len = len(self.alphabet)
 
     def encode(self, input_text, offset):
@@ -8,7 +8,7 @@ class Caesar:
         offset = abs(offset) % self.alpha_len * sign
 
         encoded_text = ""
-        input_text = input_text.lower().rstrip().lstrip()
+        input_text = input_text.upper().rstrip().lstrip()
 
         for letter in input_text:
             try:   
@@ -32,7 +32,7 @@ class Caesar:
         offset = abs(offset) % self.alpha_len * sign
 
         decoded_text = ""
-        input_text = input_text.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
 
         for letter in input_text:
             try:

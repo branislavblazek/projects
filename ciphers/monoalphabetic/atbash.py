@@ -1,9 +1,9 @@
 class Atbash():
     def __init__(self, alphabet=None):
-        self.alphabet = [chr(i+97) for i in range(26)] if alphabet is None else alphabet.lower()
+        self.alphabet = [chr(i+65) for i in range(26)] if alphabet is None else alphabet.upper()
 
     def encode(self, text):
-        input_text = text.lower()
+        input_text = text.upper()
 
         decoded_text = ""
 
@@ -20,7 +20,7 @@ class Atbash():
         return decoded_text
 
     def decode(self, text):
-        input_text = text.lower()
+        input_text = text.upper()
 
         decoded_text = ""
 

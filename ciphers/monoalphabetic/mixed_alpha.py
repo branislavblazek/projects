@@ -1,6 +1,6 @@
 class Mixed_alphabet:
     def __init__(self, alphabet=None):
-        self.alphabet = [chr(i + 97) for i in range(26)] if alphabet is None else alphabet.lower()
+        self.alphabet = [chr(i + 65) for i in range(26)] if alphabet is None else alphabet.upper()
         self.alphabet = list(self.alphabet)
         self.alpha_len = len(self.alphabet)
 
@@ -15,10 +15,10 @@ class Mixed_alphabet:
 
     def encode(self, input_text, key):
         #druhy sposob, prvy je nahodny kluc
-        key = key.lower().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
         short_key = self.repeating_string(key)
         decoded_text = ""
-        input_text = input_text.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
 
         short_table = self.alphabet.copy()
         for letter in short_key:
@@ -39,10 +39,10 @@ class Mixed_alphabet:
         return decoded_text
 
     def decode(self, input_text, key):
-        key = key.lower().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
         short_key = self.repeating_string(key)
         decoded_text = ""
-        input_text = input_text.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
 
         short_table = self.alphabet.copy()
         for letter in short_key:

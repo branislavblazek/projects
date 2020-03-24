@@ -1,10 +1,10 @@
 class Vigenere:
     def __init__(self):
-        self.alphabet = [chr(i+97) for i in range(26)]
+        self.alphabet = [chr(i+65) for i in range(26)]
 
     def encode(self, input_text, key):
-        input_text = input_text.lower().lstrip().rstrip()
-        key = key.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
         encoded_text = ""
         key_list = key * (len(input_text) // len(key))
         key_list += key[:(len(input_text) % len(key))]
@@ -23,8 +23,8 @@ class Vigenere:
         return encoded_text
 
     def decode(self, input_text, key):
-        input_text = input_text.lower().lstrip().rstrip()
-        key = key.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
         decoded_text = ""
         key_list = key * (len(input_text) // len(key))
         key_list += key[:(len(input_text) % len(key))]

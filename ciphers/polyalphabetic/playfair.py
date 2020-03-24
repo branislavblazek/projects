@@ -1,7 +1,7 @@
 class Playfair:
     def __init__(self):
-        self.alphabet = [chr(i+97) for i in range(26)]
-        self.alphabet.remove('q')
+        self.alphabet = [chr(i+65) for i in range(26)]
+        self.alphabet.remove('Q')
 
     def intersection(self, lst1, lst2): 
         lst3 = [value for value in lst2 if value not in lst1] 
@@ -30,19 +30,19 @@ class Playfair:
         return table
 
     def encode(self, input_text, key, type=1):
-        input_text = input_text.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
         text = ""
         #just allowed letter, rpl special not very used letter with smth else
         for letter in input_text:
             if letter in self.alphabet:
                 text += letter
-            elif letter == 'q':
-                text += 'k'
+            elif letter == 'Q':
+                text += 'K'
         #if len is not odd, add z to end
         if len(text) % 2 != 0:
-            text += 'x'
+            text += 'X'
 
-        key = key.lower().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
         #create table
         table = self.create_square(key)
         #create bigram
@@ -51,9 +51,9 @@ class Playfair:
             pair = text[i:i+2]
             #same pairs split with x and z
             if pair[0] == pair[1]:
-                add = pair[0] + 'x'
+                add = pair[0] + 'X'
                 bigrams.append(add)
-                pair = pair[1] + 'z'
+                pair = pair[1] + 'Z'
 
             bigrams.append(pair)
 
@@ -97,7 +97,7 @@ class Playfair:
             encoded_text += new_p1 + new_p2
 
         if len(encoded_text) % 5 != 0:
-            encoded_text += 'x' * (5 - (len(encoded_text) % 5))
+            encoded_text += 'X' * (5 - (len(encoded_text) % 5))
 
         encoded_text = [encoded_text[i:i+5] for i in range(0,len(encoded_text), 5)]
         encoded_text = ' '.join(encoded_text)

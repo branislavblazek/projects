@@ -1,7 +1,7 @@
 from pprint import pprint
 class France:
     def __init__(self):
-        self.alphabet = [chr(i+97) for i in range(26)]
+        self.alphabet = [chr(i+65) for i in range(26)]
 
     def find_order(self, lst):
         indexes = []
@@ -22,11 +22,11 @@ class France:
         return order
 
     def encode(self, input_text, key, diagonal_a, diagonal_b):
-        input_text = input_text.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
         text = [letter for letter in input_text if letter in self.alphabet]
-        key = key.lower().lstrip().rstrip()
-        diagonal_a = diagonal_a.lower().lstrip().rstrip()
-        diagonal_b = diagonal_b.lower().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
+        diagonal_a = diagonal_a.upper().lstrip().rstrip()
+        diagonal_b = diagonal_b.upper().lstrip().rstrip()
         #len povolene znaky
         key = [letter for letter in key if letter in self.alphabet]
         #najdi opakovanie
@@ -87,11 +87,11 @@ class France:
         return encoded_text
     
     def decode(self, input_text, key, diagonal_a, diagonal_b):
-        input_text = input_text.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
         text = [letter for letter in input_text if letter in self.alphabet]
-        key = key.lower().lstrip().rstrip()
-        diagonal_a = diagonal_a.lower().lstrip().rstrip()
-        diagonal_b = diagonal_b.lower().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
+        diagonal_a = diagonal_a.upper().lstrip().rstrip()
+        diagonal_b = diagonal_b.upper().lstrip().rstrip()
         #len povolene znaky
         key = [letter for letter in key if letter in self.alphabet]
         #najdi opakovanie

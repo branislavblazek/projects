@@ -1,10 +1,10 @@
 class Vigenere_autokey:
     def __init__(self):
-        self.alphabet = [chr(i+97) for i in range(26)]
+        self.alphabet = [chr(i+65) for i in range(26)]
 
     def encode(self, input_text, key):
-        input_text = input_text.lower().lstrip().rstrip()
-        key = key.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
         encoded_text = ""
         raw_text = input_text.replace(' ', '')
         key_list = key + raw_text
@@ -24,8 +24,8 @@ class Vigenere_autokey:
         return encoded_text
 
     def decode(self, input_text, key):
-        input_text = input_text.lower().lstrip().rstrip()
-        key = key.lower().lstrip().rstrip()
+        input_text = input_text.upper().lstrip().rstrip()
+        key = key.upper().lstrip().rstrip()
         decoded_text = ""
         raw_text = input_text.replace(' ', '')
         key_list = key + raw_text

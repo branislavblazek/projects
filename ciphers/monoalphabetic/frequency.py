@@ -1,6 +1,6 @@
 class Frequency:
     def __init__(self, input_text):
-        self.alphabet = [chr(i+97) for i in range(26)]
+        self.alphabet = [chr(i+65) for i in range(26)]
         self.slovnik = dict()
         self.spolu = 0
         self.input_text = ""
@@ -10,7 +10,7 @@ class Frequency:
             self.slovnik[letter] = 0
             self.table[letter] = ""
 
-        self.input_text = input_text.lower().lstrip().rstrip()
+        self.input_text = input_text.upper().lstrip().rstrip()
 
         for letter in self.input_text:
             if letter in self.alphabet:
@@ -55,16 +55,16 @@ class Frequency:
 
     def replace(self, values):
         what_replace, with_replace = values[0], values[1]
-        what_replace = what_replace.lower()
+        what_replace = what_replace.upper()
         with_replace = with_replace.upper()
 
         print('Replacing ' + what_replace + ' with ' + with_replace)
         
-        if self.crypto_table[with_replace.lower()] != '':
+        if self.crypto_table[with_replace.upper()] != '':
             print('For this letter is set another letter!')
             return
 
-        self.crypto_table[with_replace.lower()] = what_replace
+        self.crypto_table[with_replace.upper()] = what_replace
         self.input_text = self.input_text.replace(what_replace, with_replace)
 
 analysis = Frequency("""ysnaf jwddq (1926 af ushw lgof, kgmlz sxjaus – 10 bsfmsjq 1999 af zwjesfmk, kgmlz sxjaus) osk s kgmlz sxjausf tmkafwkkesf sfv xgjewj uzsajesf gx sfydg sewjausf. zak yjsfvxslzwj osk kaj osdlwj klsfxgjv, ozg sjymwv kljgfydq tml mfkmuuwkkxmddq xgj wfxjsfuzakwewfl xgj fslanw hwghdwk jwysjvdwkk gx jsuw gj ugdgmj sl lzw fslagfsd ugfnwflagf gx 1909, ozauz dwv lg lzw mfagf gx kgmlz sxjaus.[1]
