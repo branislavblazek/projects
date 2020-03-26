@@ -56,10 +56,10 @@ class Affine:
 
         return decoded_text
 
-cipher = Affine( " .,?!ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-message = cipher.encode('Common sense is not so common!', 5, 22)
+cipher = Affine( "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+message = cipher.encode('A simple message', 7, 13)
 print(message)
-normal = cipher.decode('8B52C,DBVNZNVDVB8I8NF,UBNU,DA0B?8FF2UB,U8FVY', 23, 6)
+normal = cipher.decode('NCDQWTQP FQ CEL NEFRMWLYN FA PTDQCN', 15, 3)
 print(normal)
 
 

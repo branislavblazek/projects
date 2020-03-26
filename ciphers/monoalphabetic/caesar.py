@@ -51,13 +51,13 @@ class Caesar:
 
         return decoded_text
 
-cipher = Caesar()
+cipher = Caesar(" .,?!ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 text = """Gavin Relly (1926 in Cape Town, South Africa – 10 January 1999 in Hermanus, South Africa) was a South African businessman and former chairman of Anglo American. His grandfather was Sir Walter Stanford, who argued strongly but unsuccessfully for enfranchisement for Native Peoples regardless of race or colour at the National Convention of 1909, which led to the Union of South Africa.[1]
 Relly was educated at Diocesan College and Trinity College, Oxford before serving in Italy during the Second World War. He became the private secretary of Harry Oppenheimer in 1949.
 He became chairman of Anglo American in 1982. He led a group of South African businessmen who met with the banned African National Congress in Zambia in 1985. He was succeeded by Julian Ogilvie Thompson in 1990."""
 
-sprava = cipher.encode(text, 18)
-normal = cipher.decode(sprava, 18)
+sprava = cipher.encode("Let's carve him as a dish fit for the gods!", 18)
+normal = cipher.decode("P6PYG9Z5IGM25453J", 11)
 print(sprava)
 print(normal)
 

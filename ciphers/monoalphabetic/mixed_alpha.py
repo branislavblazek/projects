@@ -63,9 +63,9 @@ class Mixed_alphabet:
         return decoded_text
 
 
-cipher = Mixed_alphabet(" .,?!ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-key = '5 minutes'
-sprava = cipher.encode('We can also use a key phrase.', key)
+cipher = Mixed_alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+key = 'zebra'
+sprava = cipher.encode('Mixed Alphabet Cipher', key)
 print(sprava)
-message = cipher.decode('V.5EUG5QO.5GQFT.LO5AG5P!.5C.X5J!LUO.5PHH', key)
+message = cipher.decode('VBARNTNP VCFF YN, VCFF YN!', key)
 print(message)

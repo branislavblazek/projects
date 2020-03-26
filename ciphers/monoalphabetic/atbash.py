@@ -37,8 +37,8 @@ class Atbash():
         return decoded_text
 
 
-cipher = Atbash("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+cipher = Atbash("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 sprava = cipher.encode('We are discovered!')
 print(sprava)
-normal = cipher.decode('lpl zoyzgilh')
+normal = cipher.decode('854VS5 Q25L 9YY 5R79U5')
 print(normal)
