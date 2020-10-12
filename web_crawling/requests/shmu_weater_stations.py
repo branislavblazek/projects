@@ -25,3 +25,6 @@ for bunka in riadky:
         data_pre_riadok.append(udaj.text)
     #vypis data
     print('|{:^20}|{:^15}|{:^20}|'.format(*data_pre_riadok))
+
+print("Press any key to continue")
+input()
