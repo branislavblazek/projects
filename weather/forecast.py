@@ -96,10 +96,10 @@ class Forecast_object:
                 short = item_forecast
                 detail_forecast = {
                     'date': self.read_time(short['dt'], 'short'),
-                    'temp': short['main']['temp'],
-                    'feels_like': short['main']['feels_like'],
-                    'temp_min': short['main']['temp_min'],
-                    'temp_max': short['main']['temp_max'],
+                    'temp': '{:5.2f}'.format(short['main']['temp']),
+                    'feels_like': '{:5.2f}'.format(short['main']['feels_like']),
+                    'temp_min': '{:5.2f}'.format(short['main']['temp_min']),
+                    'temp_max': '{:5.2f}'.format(short['main']['temp_max']),
                     'pressure': short['main']['pressure'],
                     'sea_level': short['main']['sea_level'],
                     'humidity': short['main']['humidity'],
@@ -111,9 +111,9 @@ class Forecast_object:
                     'snow': '-'
                 }
                 if 'rain' in item_forecast:
-                    detail_forecast['rain'] = item_forecast['rain']['3h']
+                    detail_forecast['rain'] = '{:5.2f}'.format(item_forecast['rain']['3h'])
                 if 'snow' in item_forecast:
-                    detail_forecast['snow'] = item_forecast['snow']['3h']
+                    detail_forecast['snow'] = '{:5.2f}'.format(item_forecast['snow']['3h'])
 
                 forecast.append(detail_forecast)
 

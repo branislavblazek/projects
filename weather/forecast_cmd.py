@@ -1,7 +1,7 @@
 from forecast import Forecast_object
 
 class Forecast_CMD:
-    def __init__(self, city_id=None, output_mode='console'):
+    def __init__(self, city_id=None):
         self.ANS_YES = ('1', 'true', 'y', 'yes', 'yo', 'yop')
         self.object = Forecast_object(city_id)
 
@@ -11,7 +11,6 @@ class Forecast_CMD:
             self.object.city_id = self.get_city_id()
 
         self.data = self.get_readable_data()
-        self.output_mode = output_mode
 
     def ask_for_city(self):
         user_city = input('Enter a name of city: ')
