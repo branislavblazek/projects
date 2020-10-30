@@ -5,7 +5,7 @@ import unicodedata
 
 class Forecast_object:
     def __init__(self, city_id=None):
-        self.KEY = '9e2d94a63be352355ba3e7d78008bc95'
+        self.KEY = ''
         self.ANS_YES = (1, 'true', 'y', 'yes', 'yo', 'yop')
         self.path_json = 'city.list.json'
         self.weather_data = None
