@@ -96,16 +96,16 @@ class Forecast_object:
                 short = item_forecast
                 detail_forecast = {
                     'date': self.read_time(short['dt'], 'short'),
-                    'temp': '{:5.2f}'.format(short['main']['temp']),
-                    'feels_like': '{:5.2f}'.format(short['main']['feels_like']),
-                    'temp_min': '{:5.2f}'.format(short['main']['temp_min']),
-                    'temp_max': '{:5.2f}'.format(short['main']['temp_max']),
+                    'temp': '{:.2f}'.format(short['main']['temp']),
+                    'feels_like': '{:.2f}'.format(short['main']['feels_like']),
+                    'temp_min': '{:.2f}'.format(short['main']['temp_min']),
+                    'temp_max': '{:.2f}'.format(short['main']['temp_max']),
                     'pressure': short['main']['pressure'],
                     'sea_level': short['main']['sea_level'],
                     'humidity': short['main']['humidity'],
                     'description': short['weather'][0]['description'],
                     'clouds': short['clouds']['all'],
-                    'wind_speed': short['wind']['speed'],
+                    'wind_speed': '{:.2f}'.format(short['wind']['speed']),
                     'wind_deg': short['wind']['deg'],
                     'rain': '-',
                     'snow': '-'
@@ -114,6 +114,15 @@ class Forecast_object:
                     detail_forecast['rain'] = '{:5.2f}'.format(item_forecast['rain']['3h'])
                 if 'snow' in item_forecast:
                     detail_forecast['snow'] = '{:5.2f}'.format(item_forecast['snow']['3h'])
+
+                if float(detail_forecast['temp']) < 10:
+                    detail_forecast['temp'] = '0' + detail_forecast['temp']
+                if float(detail_forecast['temp_max']) < 10:
+                    detail_forecast['temp_max'] = '0' + detail_forecast['temp_max']
+                if float(detail_forecast['temp_min']) < 10:
+                    detail_forecast['temp_min'] = '0' + detail_forecast['temp_min']
+                if float(detail_forecast['feels_like']) < 10:
+                    detail_forecast['feels_like'] = '0' + detail_forecast['feels_like']
 
                 forecast.append(detail_forecast)
 
