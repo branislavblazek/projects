@@ -6,8 +6,8 @@ import json
 class Edupage:
     def __init__(self):
         self.session = None
-        self.username = "BranislavBlazek"
-        self.password = 'C232AELEMW'
+        self.username = ""
+        self.password = ""
         self.get_accces()
 
     def get_accces(self):
